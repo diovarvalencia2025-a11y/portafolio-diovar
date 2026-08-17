@@ -1041,26 +1041,192 @@ body {
   transform: translateY(-4px) scale(1.04);
 }
 
-/* Responsive */
+/* ==========================================================================
+   Responsive Design System (Mobile, Tablet, Desktop)
+   ========================================================================== */
 @media (max-width: 1024px) {
   .saas-grid, .flagship-grid, .contact-grid {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
   .hero-sub-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .skills-grid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  /* Navbar Mobile */
+  .navbar-inner {
+    height: 66px;
+  }
   .nav-links {
     display: none;
   }
-  .projects-showcase-grid {
-    grid-template-columns: 1fr;
+  .brand-wrapper {
+    gap: 8px;
   }
+  .brand-symbol {
+    width: 36px;
+    height: 36px;
+    font-size: 1.05rem;
+  }
+  .brand-name {
+    font-size: 1.05rem;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .brand-tag {
+    display: none;
+  }
+  .nav-actions .btn-outline {
+    display: none;
+  }
+  .nav-actions .btn-dark {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+
+  /* Hero Section */
+  .hero-wrapper {
+    padding: 24px 0 40px;
+  }
+  .hero-artwork-frame {
+    border-radius: 12px;
+  }
+  .hero-sub-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .sub-card {
+    padding: 24px 18px;
+  }
+  .sub-card-title {
+    font-size: 1.35rem;
+  }
+  .sub-card-text {
+    font-size: 0.88rem;
+  }
+
   .quick-stats-row {
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    gap: 16px;
+    padding: 18px;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  /* Flagship Sections */
+  .flagship-saas-section, .featured-flagship-section {
+    padding: 70px 0;
+  }
+  .saas-title, .flagship-title {
+    font-size: 2rem;
+    line-height: 1.15;
+  }
+  .saas-metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .saas-metric-box {
+    padding: 10px 12px;
+  }
+
+  /* Showcase Grid & Filter Tabs */
+  .filter-tabs-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+    margin-bottom: 30px;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+  .filter-tabs-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .filter-tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 0.82rem;
+  }
+
+  .projects-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .project-frame {
+    height: 200px;
+    padding: 8px;
+  }
+  .project-card-body {
+    padding: 20px 16px;
+  }
+  .project-card-title {
+    font-size: 1.25rem;
+  }
+
+  /* Skills & Contact */
+  .skill-box {
+    padding: 24px 18px;
+  }
+  .contact-section {
+    padding: 70px 0 40px;
+  }
+  .contact-form {
+    padding: 24px 18px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  /* Floating WhatsApp */
+  .whatsapp-float {
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 16px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-name {
+    font-size: 0.92rem;
+  }
+  .brand-symbol {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+  }
+  .nav-actions .btn-dark {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+  .section-title {
+    font-size: 1.85rem;
+  }
+  .saas-title, .flagship-title {
+    font-size: 1.75rem;
   }
 }
