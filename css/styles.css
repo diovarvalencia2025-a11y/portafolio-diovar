@@ -475,7 +475,9 @@ body {
   color: #FFFFFF;
   padding: 110px 0;
   position: relative;
-  overflow: hidden;
+  overflow: hidden !important;
+  width: 100%;
+  max-width: 100vw;
 }
 
 .flagship-saas-section::before {
@@ -494,6 +496,7 @@ body {
   grid-template-columns: 1.2fr 0.8fr;
   gap: 50px;
   align-items: center;
+  width: 100%;
 }
 
 .saas-mockup-wrapper {
@@ -502,6 +505,8 @@ body {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 100%;
 }
 
 .saas-mockup-img {
@@ -554,6 +559,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 32px;
+  width: 100%;
 }
 
 .saas-metric-box {
@@ -583,7 +589,9 @@ body {
   color: #FFFFFF;
   padding: 110px 0;
   position: relative;
-  overflow: hidden;
+  overflow: hidden !important;
+  width: 100%;
+  max-width: 100vw;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -1060,66 +1068,99 @@ body {
 
 @media (max-width: 768px) {
   html, body {
-    overflow-x: hidden;
+    width: 100vw;
     max-width: 100vw;
+    overflow-x: hidden !important;
+    position: relative;
   }
 
   .container {
     padding: 0 16px;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
 
   .section {
-    padding: 60px 0;
+    padding: 50px 0;
   }
 
   /* Navbar Mobile */
+  .navbar {
+    width: 100%;
+    max-width: 100vw;
+  }
   .navbar-inner {
-    height: 66px;
+    height: 64px;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .nav-links {
-    display: none;
+    display: none !important;
   }
   .brand-wrapper {
+    display: flex;
+    align-items: center;
     gap: 8px;
   }
   .brand-symbol {
     width: 36px;
     height: 36px;
-    font-size: 1.05rem;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .brand-name {
     font-size: 1.05rem;
+    line-height: 1.15;
+    font-weight: 800;
     white-space: nowrap;
-    letter-spacing: -0.01em;
+    display: block;
   }
   .brand-tag {
-    display: none;
+    display: none !important;
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
   }
   .nav-actions .btn-outline {
-    display: none;
+    display: none !important;
   }
   .nav-actions .btn-dark {
     padding: 8px 14px;
     font-size: 0.82rem;
+    white-space: nowrap;
   }
 
   /* Hero Section */
   .hero-wrapper {
-    padding: 24px 0 40px;
+    padding: 20px 0 36px;
+    width: 100%;
+    overflow: hidden;
   }
   .hero-artwork-frame {
     border-radius: 12px;
+    width: 100%;
   }
   .hero-sub-cards {
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-top: 24px;
+    margin-top: 20px;
+    width: 100%;
   }
   .sub-card {
-    padding: 24px 18px;
+    padding: 20px 16px;
   }
   .sub-card-title {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
   .sub-card-text {
     font-size: 0.88rem;
@@ -1128,17 +1169,24 @@ body {
   .quick-stats-row {
     flex-direction: column;
     gap: 16px;
-    padding: 18px;
+    padding: 16px;
     width: 100%;
     align-items: flex-start;
   }
 
-  /* Flagship Sections */
+  /* Flagship Sections (Prevent 600px circle overflow causing giant white space) */
   .flagship-saas-section, .featured-flagship-section {
-    padding: 70px 0;
+    padding: 60px 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden !important;
+  }
+  .flagship-saas-section::before,
+  .featured-flagship-section::before {
+    display: none !important;
   }
   .saas-title, .flagship-title {
-    font-size: 2rem;
+    font-size: 1.85rem;
     line-height: 1.15;
   }
   .saas-metrics-grid {
@@ -1155,10 +1203,11 @@ body {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 12px;
-    margin-bottom: 30px;
+    padding-bottom: 10px;
+    margin-bottom: 24px;
     gap: 8px;
     justify-content: flex-start;
+    width: 100%;
   }
   .filter-tabs-wrapper::-webkit-scrollbar {
     display: none;
@@ -1166,34 +1215,46 @@ body {
   .filter-tab {
     white-space: nowrap;
     flex-shrink: 0;
-    padding: 8px 16px;
-    font-size: 0.82rem;
+    padding: 7px 14px;
+    font-size: 0.8rem;
   }
 
   .projects-showcase-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
+    width: 100%;
   }
   .project-frame {
-    height: 200px;
+    height: 190px;
     padding: 8px;
   }
   .project-card-body {
-    padding: 20px 16px;
+    padding: 18px 14px;
   }
   .project-card-title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   /* Skills & Contact */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
   .skill-box {
-    padding: 24px 18px;
+    padding: 20px 16px;
   }
   .contact-section {
-    padding: 70px 0 40px;
+    padding: 60px 0 36px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
   .contact-form {
-    padding: 24px 18px;
+    padding: 20px 16px;
   }
   .footer-bottom {
     flex-direction: column;
@@ -1201,32 +1262,33 @@ body {
     text-align: center;
   }
 
-  /* Floating WhatsApp */
+  /* Floating WhatsApp (Fixed correctly on screen without right-edge clipping) */
   .whatsapp-float {
-    bottom: 16px;
-    right: 16px;
-    padding: 10px 16px;
-    font-size: 0.82rem;
+    bottom: 16px !important;
+    right: 14px !important;
+    padding: 9px 14px !important;
+    font-size: 0.8rem !important;
+    z-index: 99999 !important;
   }
 }
 
 @media (max-width: 420px) {
   .brand-name {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
   }
   .brand-symbol {
     width: 32px;
     height: 32px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
   .nav-actions .btn-dark {
     padding: 6px 10px;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
   }
   .section-title {
-    font-size: 1.85rem;
+    font-size: 1.7rem;
   }
   .saas-title, .flagship-title {
-    font-size: 1.75rem;
+    font-size: 1.65rem;
   }
 }
