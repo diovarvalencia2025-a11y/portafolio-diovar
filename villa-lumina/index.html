@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VILLA LUMINA — Mansión de Ultra Lujo | En Venta 28.500.000 €</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Cinzel:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        cinzel: ['"Cinzel"', 'serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        gold: {
+                            300: '#FDE68A',
+                            400: '#F3C969',
+                            500: '#D4AF37',
+                            600: '#B89020',
+                            700: '#8A6808',
+                        },
+                        stone: {
+                            950: '#040406',
+                            900: '#0A0A0E',
+                            850: '#101016',
+                            800: '#161620',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #040406;
+            color: #F1F5F9;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Custom Luxury Cursor */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            border-radius: 50%;
+            transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #D4AF37;
+            box-shadow: 0 0 12px #D4AF37;
+        }
+
+        .cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            transition: transform 0.08s ease-out;
+        }
+
+        .cursor-hover .cursor-ring {
+            width: 60px;
+            height: 60px;
+            border-color: #F3C969;
+            background: rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(2px);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF5D6 25%, #D4AF37 65%, #9E790E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .luxury-glass {
+            background: rgba(12, 12, 18, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.85);
+        }
+
+        .luxury-glass:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .glow-gold {
+            box-shadow: 0 0 60px -10px rgba(212, 175, 55, 0.35);
+        }
+
+        /* Shimmer Lighting Sweep Animation */
+        .shimmer-sweep {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-sweep::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%);
+            transform: rotate(30deg);
+            animation: shimmerEffect 6s infinite;
+        }
+        @keyframes shimmerEffect {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        /* 3D Card Perspective */
+        .perspective-container {
+            perspective: 1200px;
+        }
+        .tilt-card {
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #040406;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #D4AF37, #8A6808);
+            border-radius: 4px;
+        }
+
+        /* Radar Pulse Animation */
+        @keyframes radarPulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.6); opacity: 0; }
+            100% { transform: scale(0.95); opacity: 0; }
+        }
+        .radar-pulse {
+            animation: radarPulse 2.5s infinite ease-out;
+        }
+    </style>
+</head>
+<body class="selection:bg-gold-500 selection:text-black">
+
+    <!-- Custom Cursor Elements -->
+    <div id="cursor-dot" class="custom-cursor cursor-dot hidden md:block"></div>
+    <div id="cursor-ring" class="custom-cursor cursor-ring hidden md:block"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 z-50 transform translate-y-24 opacity-0 transition-all duration-500 luxury-glass text-gold-400 font-sans text-sm px-6 py-5 rounded-3xl flex items-center gap-4 border border-gold-500/50 shadow-2xl">
+        <i class="fa-solid fa-circle-check text-2xl text-gold-400"></i>
+        <div>
+            <span class="font-bold text-white block text-sm uppercase tracking-wider">Concierge Privado Villa Lumina</span>
+            <span class="text-xs text-slate-300">Solicitud VIP recibida. Un director de patrimonio se contactará en &lt;2 horas.</span>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-stone-950/85 backdrop-blur-2xl border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 h-24 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-4 group">
+                <div class="w-11 h-11 rounded-full border border-gold-500/60 flex items-center justify-center text-gold-400 font-cinzel text-lg group-hover:bg-gold-500/20 group-hover:scale-105 transition-all shadow-md shadow-gold-500/10">
+                    VL
+                </div>
+                <div>
+                    <span class="font-cinzel font-black text-xl tracking-[0.25em] text-white block">VILLA LUMINA</span>
+                    <span class="text-[9px] tracking-[0.35em] text-gold-400 uppercase block font-bold">Costa Mediterránea • 28.5M €</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-9 text-xs font-bold tracking-widest uppercase text-slate-200">
+                <a href="#tour-scroll" class="hover:text-gold-400 transition-colors">Tour FPV</a>
+                <a href="#espacios" class="hover:text-gold-400 transition-colors">Espacios de Élite</a>
+                <a href="#planos-interactivos" class="hover:text-gold-400 transition-colors">Planos 3D</a>
+                <a href="#calculadora" class="hover:text-gold-400 transition-colors">Inversión & ROI</a>
+                <a href="#contacto" class="hover:text-gold-400 transition-colors">Visita VIP</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <!-- Sound Toggle -->
+                <button id="sound-toggle" onclick="toggleLuxuryAmbience()" title="Ambiente Sonoro Relajante" class="w-10 h-10 rounded-full border border-gold-500/40 flex items-center justify-center text-gold-400 hover:bg-gold-500/20 transition-all text-xs">
+                    <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
+                </button>
+
+                <a href="#contacto" class="px-7 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 hover:from-gold-300 hover:to-gold-500 text-black font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-gold-500/25 hover:scale-105 active:scale-95">
+                    Dossier Confidencial
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img id="hero-bg" src="./hero_exterior.jpg" alt="Villa Lumina Exterior" class="w-full h-full object-cover scale-105 transition-transform duration-1000 ease-out">
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-stone-950/70"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-stone-950/80 via-transparent to-stone-950/80"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24">
+            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full luxury-glass border-gold-500/40 text-gold-400 text-xs font-semibold uppercase tracking-[0.3em] mb-8 shadow-lg">
+                <i class="fa-solid fa-crown text-gold-400"></i> Residencia Privada de Ultra Lujo
+            </div>
+
+            <h1 class="text-5xl sm:text-7xl lg:text-9xl font-black font-cinzel text-white leading-none tracking-tight mb-8 drop-shadow-2xl">
+                VILLA <br>
+                <span class="gold-gradient-text">LUMINA</span>
+            </h1>
+
+            <p class="text-lg sm:text-2xl text-slate-100 max-w-3xl mx-auto font-serif italic leading-relaxed mb-12 drop-shadow">
+                "Donde el horizonte infinito se encuentra con la máxima expresión de la arquitectura de autor contemporánea."
+            </p>
+
+            <!-- Quick Key Metrics Bar with Counter Animation -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto p-5 rounded-3xl luxury-glass border border-gold-500/40 mb-12 shadow-2xl">
+                <div class="p-3 border-r border-white/15 last:border-0">
+                    <span class="block text-2xl sm:text-3xl font-black font-cinzel text-white counter" data-target="1650">1.650</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-400 font-bold">m² Construidos</span>
+                </div>
+                <div class="p-3 border-r border-white/15 last:border-0">
+                    <span class="block text-2xl sm:text-3xl font-black font-cinzel text-white counter" data-target="6">6</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-400 font-bold">Suites de Lujo</span>
+                </div>
+                <div class="p-3 border-r border-white/15 last:border-0">
+                    <span class="block text-2xl sm:text-3xl font-black font-cinzel text-white counter" data-target="9">9</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-400 font-bold">Baños Mármol</span>
+                </div>
+                <div class="p-3">
+                    <span class="block text-2xl sm:text-3xl font-black font-cinzel text-gold-400">28.5M €</span>
+                    <span class="text-[10px] uppercase tracking-widest text-slate-300 font-bold">Precio Inversión</span>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <a href="#tour-scroll" class="inline-flex flex-col items-center gap-2 text-xs font-bold tracking-widest text-gold-400 uppercase animate-bounce">
+                <span>Desliza para Iniciar el Tour Cinematográfico</span>
+                <i class="fa-solid fa-chevron-down text-base"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCROLLYTELLING PINNED INTERACTIVE TOUR (CINEMATIC SCROLL EXPERIENCE) -->
+    <!-- ========================================================================= -->
+    <section id="tour-scroll" class="relative h-[450vh] bg-stone-950">
+        
+        <!-- Pinned Fullscreen Stage -->
+        <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+            
+            <!-- Dynamic Image Sequence -->
+            <div class="absolute inset-0 w-full h-full">
+                <!-- Frame 1: Poolside Sunset Exterior -->
+                <img id="tour-img-1" src="./hero_exterior.jpg" alt="Villa Exterior" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out will-change-transform scale-100">
+                
+                <!-- Frame 2: Chef Kitchen & Great Room -->
+                <img id="tour-img-2" src="./kitchen_living.jpg" alt="Villa Great Room" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 ease-out will-change-transform scale-95">
+
+                <!-- Frame 3: Master Suite -->
+                <img id="tour-img-3" src="./master_suite.jpg" alt="Villa Master Suite" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 ease-out will-change-transform scale-95">
+
+                <!-- Frame 4: Spa & Granite Tub -->
+                <img id="tour-img-4" src="./spa_bathroom.jpg" alt="Villa Spa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 ease-out will-change-transform scale-95">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-transparent to-stone-950/70 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-stone-950/85 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- Telemetry & Stage Progress Bar -->
+            <div class="absolute top-28 left-6 sm:left-12 z-20 pointer-events-none">
+                <div class="px-5 py-2.5 rounded-2xl luxury-glass border-gold-500/40 flex items-center gap-3 shadow-lg">
+                    <span class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="font-mono text-xs text-gold-400 font-bold tracking-widest uppercase" id="tour-step-badge">Paso 1 de 4 • Fachada Exterior</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Story Card Overlay -->
+            <div class="relative z-20 max-w-7xl w-full mx-auto px-6 sm:px-12 flex justify-start items-center">
+                <div class="max-w-xl p-8 sm:p-12 rounded-3xl luxury-glass border border-gold-500/40 glow-gold transition-all duration-500 tilt-card" id="tour-card">
+                    <span class="text-gold-400 font-mono text-xs font-bold uppercase tracking-[0.25em] block mb-3" id="card-tag">01 // ARQUITECTURA EXTERIOR</span>
+                    <h2 class="text-3xl sm:text-5xl font-bold font-cinzel text-white leading-tight mb-4" id="card-title">La Llegada a Villa Lumina</h2>
+                    <p class="text-sm sm:text-base text-slate-200 font-light leading-relaxed mb-6" id="card-desc">
+                        Una piscina infinita de 25 metros de longitud se fusiona visualmente con las aguas del Mediterráneo. Piedra caliza travertina y cristales templados de piso a techo definen una silueta icónica.
+                    </p>
+                    <div class="flex items-center gap-4 text-xs font-semibold tracking-wider text-gold-400">
+                        <span class="px-4 py-2 rounded-xl bg-gold-500/10 border border-gold-500/30" id="card-metric-1">Piscina Climatizada 25m</span>
+                        <span class="px-4 py-2 rounded-xl bg-gold-500/10 border border-gold-500/30" id="card-metric-2">Orientación Sur Plena</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Progress Track -->
+            <div class="absolute bottom-8 left-6 sm:left-12 right-6 sm:right-12 z-20 flex items-center justify-between font-mono text-xs text-slate-400">
+                <div class="flex items-center gap-4">
+                    <span class="text-white font-black text-sm" id="scroll-percent">0%</span>
+                    <div class="w-40 sm:w-80 h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div id="scroll-bar" class="h-full bg-gradient-to-r from-gold-500 to-gold-300 w-0 transition-all duration-100"></div>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <button onclick="scrollToStep(0)" class="hover:text-gold-400 transition-colors font-semibold">01. Exterior</button>
+                    <button onclick="scrollToStep(1)" class="hover:text-gold-400 transition-colors font-semibold">02. Salón & Cocina</button>
+                    <button onclick="scrollToStep(2)" class="hover:text-gold-400 transition-colors font-semibold">03. Master Suite</button>
+                    <button onclick="scrollToStep(3)" class="hover:text-gold-400 transition-colors font-semibold">04. Spa & Baño</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section: Galería de Espacios & Detalles de Autor -->
+    <section id="espacios" class="py-32 px-6 sm:px-12 bg-stone-900/70 relative border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-20 gap-6">
+                <div>
+                    <span class="text-gold-400 font-mono text-xs uppercase tracking-widest font-bold block mb-2">// ESPACIOS DE ÉLITE</span>
+                    <h2 class="text-4xl sm:text-6xl font-black font-cinzel text-white">Diseño Sin Concesiones</h2>
+                </div>
+                <p class="text-slate-300 text-sm max-w-md font-light leading-relaxed">
+                    Cada rincón de Villa Lumina ha sido concebido para maximizar la luz natural, la privacidad absoluta y el confort sensorial de alto nivel.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 perspective-container">
+                <!-- Card 1 -->
+                <div class="p-8 rounded-3xl luxury-glass border border-gold-500/20 group hover:border-gold-500/60 transition-all duration-500 tilt-card flex flex-col justify-between shimmer-sweep">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-cinzel text-white mb-3">El Gran Salón & Cocina</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6">
+                            Isla monolítica de mármol Nero Marquina con electrodomésticos Gaggenau Black Series ocultos e iluminación perimetral cálida.
+                        </p>
+                    </div>
+                    <div class="h-56 rounded-2xl overflow-hidden relative border border-white/10">
+                        <img src="./kitchen_living.jpg" alt="Cocina" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-8 rounded-3xl luxury-glass border border-gold-500/20 group hover:border-gold-500/60 transition-all duration-500 tilt-card flex flex-col justify-between shimmer-sweep">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-bed"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-cinzel text-white mb-3">Master Suite Presidencial</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6">
+                            140 m² con chimenea de bioetanol, vestidor doble de madera de cedro, vistas 270° y terraza privada con jacuzzi panorámico.
+                        </p>
+                    </div>
+                    <div class="h-56 rounded-2xl overflow-hidden relative border border-white/10">
+                        <img src="./master_suite.jpg" alt="Master Suite" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-8 rounded-3xl luxury-glass border border-gold-500/20 group hover:border-gold-500/60 transition-all duration-500 tilt-card flex flex-col justify-between shimmer-sweep">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-hot-tub-person"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-cinzel text-white mb-3">Santuario Spa & Wellness</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6">
+                            Bañera de granito negro tallada en un solo bloque, sauna finlandesa, ducha de lluvia doble y cromoterapia frente al mar.
+                        </p>
+                    </div>
+                    <div class="h-56 rounded-2xl overflow-hidden relative border border-white/10">
+                        <img src="./spa_bathroom.jpg" alt="Spa" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Planos Arquitectónicos & Hotspots Interactivos -->
+    <section id="planos-interactivos" class="py-32 px-6 sm:px-12 bg-stone-950 relative border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-gold-400 font-mono text-xs uppercase tracking-widest font-bold block mb-3">// ARQUITECTURA TÉCNICA</span>
+                <h2 class="text-4xl sm:text-5xl font-black font-cinzel text-white mb-4">Plano Maestro & Puntos Clave</h2>
+                <p class="text-slate-300 text-sm">Explora la distribución de los 1.650 m² haciendo clic en los puntos interactivos.</p>
+            </div>
+
+            <div class="relative rounded-3xl luxury-glass p-6 sm:p-12 border border-gold-500/30 overflow-hidden">
+                <div class="relative h-[400px] sm:h-[500px] w-full rounded-2xl bg-stone-900 border border-white/15 overflow-hidden flex items-center justify-center">
+                    <img src="./kitchen_living.jpg" alt="Plano y Distribución" class="w-full h-full object-cover opacity-50">
+
+                    <!-- Interactive Hotspots -->
+                    <!-- Hotspot 1: Piscina -->
+                    <button onclick="showHotspotInfo('Piscina Infinita 25m', 'Estructura suspendida sobre el acantilado con sistema de climatización geotérmica y tratamiento salino.')" class="absolute top-[35%] left-[25%] w-8 h-8 rounded-full bg-gold-500 text-black flex items-center justify-center font-bold text-xs shadow-xl group hover:scale-125 transition-transform">
+                        <span class="absolute inset-0 rounded-full bg-gold-400 radar-pulse"></span>
+                        <i class="fa-solid fa-water relative z-10"></i>
+                    </button>
+
+                    <!-- Hotspot 2: Salón -->
+                    <button onclick="showHotspotInfo('Gran Salón & Mármol', 'Espacio de 180 m² con techos de 6 metros de altura libre y cerramientos motorizados suizos.')" class="absolute top-[50%] left-[50%] w-8 h-8 rounded-full bg-gold-500 text-black flex items-center justify-center font-bold text-xs shadow-xl group hover:scale-125 transition-transform">
+                        <span class="absolute inset-0 rounded-full bg-gold-400 radar-pulse"></span>
+                        <i class="fa-solid fa-couch relative z-10"></i>
+                    </button>
+
+                    <!-- Hotspot 3: Master Suite -->
+                    <button onclick="showHotspotInfo('Master Suite 140 m²', 'Planta superior completa con terraza perimetral de 270 grados y acceso privado por ascensor.')" class="absolute top-[28%] left-[72%] w-8 h-8 rounded-full bg-gold-500 text-black flex items-center justify-center font-bold text-xs shadow-xl group hover:scale-125 transition-transform">
+                        <span class="absolute inset-0 rounded-full bg-gold-400 radar-pulse"></span>
+                        <i class="fa-solid fa-crown relative z-10"></i>
+                    </button>
+                </div>
+
+                <!-- Dynamic Hotspot Info Box -->
+                <div id="hotspot-box" class="mt-6 p-6 rounded-2xl bg-stone-900/90 border border-gold-500/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-gold-400 font-mono text-xs uppercase font-bold tracking-widest block" id="hotspot-title">Punto Seleccionado: Piscina Infinita</span>
+                        <p class="text-slate-200 text-xs mt-1" id="hotspot-desc">Haz clic en los puntos dorados del plano para ver las especificaciones de ingeniería.</p>
+                    </div>
+                    <a href="#contacto" class="px-5 py-2.5 rounded-xl bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-black font-bold text-xs uppercase tracking-wider transition-all">
+                        Consultar Planos CAD
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Calculadora de Inversión y Rentabilidad UHNW -->
+    <section id="calculadora" class="py-32 px-6 sm:px-12 bg-stone-900/60 relative border-t border-white/10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-400 font-mono text-xs uppercase tracking-widest font-bold block mb-3">// ANÁLISIS FINANCIERO</span>
+                <h2 class="text-3xl sm:text-5xl font-black font-cinzel text-white mb-4">Calculadora de Inversión & Rendimiento</h2>
+                <p class="text-slate-300 text-xs">Simula la rentabilidad del alquiler vacacional VIP y la estructura de capital.</p>
+            </div>
+
+            <div class="p-8 sm:p-12 rounded-3xl luxury-glass border border-gold-500/40 glow-gold grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-200 uppercase mb-2">Precio del Inmueble</label>
+                        <input type="text" disabled value="28.500.000 €" class="w-full bg-stone-950 border border-white/20 rounded-xl px-5 py-3 text-sm text-gold-400 font-mono font-bold">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-200 mb-2">
+                            <span>Entrada Inicial: <span id="down-val" class="text-gold-400">30% (8.550.000 €)</span></span>
+                        </div>
+                        <input type="range" id="down-range" min="20" max="60" value="30" oninput="updateCalculator()" class="w-full accent-gold-500 h-2 bg-stone-950 rounded-lg cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-200 mb-2">
+                            <span>Semanas Alquiler VIP / Año: <span id="weeks-val" class="text-gold-400">16 semanas</span></span>
+                        </div>
+                        <input type="range" id="weeks-range" min="6" max="30" value="16" oninput="updateCalculator()" class="w-full accent-gold-500 h-2 bg-stone-950 rounded-lg cursor-pointer">
+                    </div>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-stone-950/95 border border-gold-500/40 text-center space-y-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-slate-300 block mb-1">Ingreso Anual Bruto Estimado</span>
+                        <span class="text-3xl sm:text-4xl font-black font-cinzel text-gold-400 block" id="gross-income">1.280.000 €</span>
+                        <span class="text-[10px] text-slate-400 block mt-1">(80.000 € / semana de tarifa media VIP)</span>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                        <span class="text-slate-300">Yield / Rentabilidad Anual:</span>
+                        <span class="font-bold font-mono text-emerald-400 text-base" id="roi-val">4.5% Anual</span>
+                    </div>
+
+                    <a href="#contacto" class="block w-full py-4 rounded-xl bg-gold-500 hover:bg-gold-400 text-black font-black text-xs uppercase tracking-widest transition-all">
+                        Solicitar Informe de Rentabilidad
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP Booking Form -->
+    <section id="contacto" class="py-32 px-6 sm:px-12 bg-stone-950 relative border-t border-gold-500/30">
+        <div class="max-w-5xl mx-auto rounded-3xl luxury-glass p-8 sm:p-16 border border-gold-500/40 glow-gold relative overflow-hidden">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="px-5 py-2 rounded-full bg-gold-500/10 text-gold-400 font-mono text-xs font-semibold uppercase tracking-widest mb-4 inline-block border border-gold-500/30">
+                    Propiedad Exclusiva • 28.500.000 €
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black font-cinzel text-white mb-4">Agendar Visita Privada VIP</h2>
+                <p class="text-slate-200 text-sm font-light leading-relaxed">
+                    Las visitas a Villa Lumina son estrictamente confidenciales y se coordinan exclusivamente a través de nuestro Concierge Privado.
+                </p>
+            </div>
+
+            <form onsubmit="handleVipSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 uppercase mb-2">Nombre Completo / Entidad</label>
+                    <input type="text" required placeholder="Nombre y Apellidos" class="w-full bg-stone-950 border border-white/20 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 uppercase mb-2">Correo Electrónico Confidencial</label>
+                    <input type="email" required placeholder="inversion@holding.com" class="w-full bg-stone-950 border border-white/20 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 uppercase mb-2">Teléfono / WhatsApp Directo</label>
+                    <input type="tel" required placeholder="+34 600 000 000" class="w-full bg-stone-950 border border-white/20 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 uppercase mb-2">Fecha Preferida de Visita</label>
+                    <input type="date" required class="w-full bg-stone-950 border border-white/20 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors">
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold text-slate-200 uppercase mb-2">Requerimientos Especiales (Helipuerto, Transfer Privado, NDA)</label>
+                    <textarea rows="3" placeholder="Indique si requiere helipuerto privado, servicio de escolta o firma de acuerdo de confidencialidad previo..." class="w-full bg-stone-950 border border-white/20 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors"></textarea>
+                </div>
+                <div class="sm:col-span-2 pt-4">
+                    <button type="submit" class="w-full py-5 rounded-2xl bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 hover:from-gold-300 hover:to-gold-500 text-black font-black text-sm uppercase tracking-[0.2em] transition-all shadow-2xl shadow-gold-500/30 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-lock"></i> Solicitar Dossier Privado & Visita VIP
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-6 sm:px-12 bg-stone-950 border-t border-white/10 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 mb-8">
+            <div class="flex items-center gap-3">
+                <span class="font-cinzel font-black text-lg text-white tracking-widest">VILLA LUMINA</span>
+                <span class="text-gold-400 font-mono text-xs">28.5M €</span>
+            </div>
+            <p class="text-slate-300">Inmobiliaria de Ultra Lujo & Real Estate Exclusivo • Costa Mediterránea</p>
+        </div>
+        <p class="text-[11px] text-slate-500">© 2026 Villa Lumina Estate. Todos los derechos reservados. Desarrollado con Estándares de Arquitectura Web de Alto Nivel.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Custom Luxury Cursor Tracking
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+
+        window.addEventListener('mousemove', (e) => {
+            if (cursorDot && cursorRing) {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                cursorRing.style.left = `${e.clientX}px`;
+                cursorRing.style.top = `${e.clientY}px`;
+            }
+        });
+
+        // Hover Effect on Interactive elements
+        document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // 3D Tilt Card Effect on Mouse Move
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - (rect.width / 2);
+                const y = e.clientY - rect.top - (rect.height / 2);
+                const xRot = -(y / (rect.height / 2)) * 8;
+                const yRot = (x / (rect.width / 2)) * 8;
+                card.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const speed = target / 50;
+                    const updateCount = () => {
+                        count += speed;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count).toLocaleString();
+                            setTimeout(updateCount, 25);
+                        } else {
+                            counter.innerText = target.toLocaleString();
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
+
+        // Scrollytelling FPV Logic
+        const steps = [
+            {
+                tag: "01 // ARQUITECTURA EXTERIOR",
+                title: "La Llegada a Villa Lumina",
+                desc: "Una piscina infinita de 25 metros de longitud se fusiona visualmente con las aguas del Mediterráneo. Piedra caliza travertina y cristales templados de piso a techo definen una silueta icónica.",
+                m1: "Piscina Climatizada 25m",
+                m2: "Orientación Sur Plena",
+                badge: "Paso 1 de 4 • Fachada Exterior"
+            },
+            {
+                tag: "02 // EL GRAN SALÓN & COCINA",
+                title: "Espacios Abiertos & Mármol Nero",
+                desc: "Al atravesar los ventanales corredizos motorizados, la sala se integra con la cocina de autor. Isla monolítica de mármol Nero Marquina con iluminación perimetral cálida bajo los gabinetes.",
+                m1: "Mármol Nero Marquina",
+                m2: "Gaggenau Black Series",
+                badge: "Paso 2 de 4 • Gran Salón & Cocina"
+            },
+            {
+                tag: "03 // MASTER SUITE PRESIDENCIAL",
+                title: "El Descanso en las Alturas",
+                desc: "Dormitorio principal con chimenea de bioetanol, vistas panorámicas de 270 grados a la costa, revestimientos en nogal italiano y terraza privada con jacuzzi exterior.",
+                m1: "Superficie 140 m²",
+                m2: "Chimenea Panorámica",
+                badge: "Paso 3 de 4 • Master Suite"
+            },
+            {
+                tag: "04 // SANTUARIO DE BIENESTAR & SPA",
+                title: "Spa Privado Frente al Ocaso",
+                desc: "Bañera de granito negro esculpida en una sola pieza sobre lecho de piedras de río. Ducha de lluvia doble con cromoterapia y ventanales panorámicos hacia la puesta de sol.",
+                m1: "Bañera de Granito Negro",
+                m2: "Ducha Lluvia Sensorial",
+                badge: "Paso 4 de 4 • Spa & Wellness"
+            }
+        ];
+
+        const tourSection = document.getElementById('tour-scroll');
+        const img1 = document.getElementById('tour-img-1');
+        const img2 = document.getElementById('tour-img-2');
+        const img3 = document.getElementById('tour-img-3');
+        const img4 = document.getElementById('tour-img-4');
+        const cardTag = document.getElementById('card-tag');
+        const cardTitle = document.getElementById('card-title');
+        const cardDesc = document.getElementById('card-desc');
+        const cardMetric1 = document.getElementById('card-metric-1');
+        const cardMetric2 = document.getElementById('card-metric-2');
+        const stepBadge = document.getElementById('tour-step-badge');
+        const scrollBar = document.getElementById('scroll-bar');
+        const scrollPercent = document.getElementById('scroll-percent');
+
+        let currentStepIndex = 0;
+
+        window.addEventListener('scroll', () => {
+            if (!tourSection) return;
+            const rect = tourSection.getBoundingClientRect();
+            const totalScrollable = tourSection.offsetHeight - window.innerHeight;
+            const currentScroll = -rect.top;
+
+            if (currentScroll >= 0 && currentScroll <= totalScrollable) {
+                const progress = Math.min(Math.max(currentScroll / totalScrollable, 0), 1);
+                
+                if (scrollBar) scrollBar.style.width = `${progress * 100}%`;
+                if (scrollPercent) scrollPercent.innerText = `${Math.round(progress * 100)}%`;
+
+                let stepIdx = 0;
+                if (progress < 0.25) {
+                    stepIdx = 0;
+                    if (img1) { img1.style.opacity = '1'; img1.style.transform = `scale(${1 + progress * 0.4})`; }
+                    if (img2) img2.style.opacity = '0';
+                    if (img3) img3.style.opacity = '0';
+                    if (img4) img4.style.opacity = '0';
+                } else if (progress >= 0.25 && progress < 0.5) {
+                    stepIdx = 1;
+                    const localProg = (progress - 0.25) / 0.25;
+                    if (img1) img1.style.opacity = `${1 - localProg}`;
+                    if (img2) { img2.style.opacity = `${localProg}`; img2.style.transform = `scale(${0.95 + localProg * 0.15})`; }
+                    if (img3) img3.style.opacity = '0';
+                    if (img4) img4.style.opacity = '0';
+                } else if (progress >= 0.5 && progress < 0.75) {
+                    stepIdx = 2;
+                    const localProg = (progress - 0.5) / 0.25;
+                    if (img2) img2.style.opacity = `${1 - localProg}`;
+                    if (img3) { img3.style.opacity = `${localProg}`; img3.style.transform = `scale(${0.95 + localProg * 0.15})`; }
+                    if (img1) img1.style.opacity = '0';
+                    if (img4) img4.style.opacity = '0';
+                } else {
+                    stepIdx = 3;
+                    const localProg = (progress - 0.75) / 0.25;
+                    if (img3) img3.style.opacity = `${1 - localProg}`;
+                    if (img4) { img4.style.opacity = `${localProg}`; img4.style.transform = `scale(${0.95 + localProg * 0.15})`; }
+                    if (img1) img1.style.opacity = '0';
+                    if (img2) img2.style.opacity = '0';
+                }
+
+                if (stepIdx !== currentStepIndex) {
+                    currentStepIndex = stepIdx;
+                    updateCardContent(steps[stepIdx]);
+                }
+            }
+        });
+
+        function updateCardContent(stepData) {
+            const card = document.getElementById('tour-card');
+            if (!card) return;
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(15px)';
+
+            setTimeout(() => {
+                if (cardTag) cardTag.innerText = stepData.tag;
+                if (cardTitle) cardTitle.innerText = stepData.title;
+                if (cardDesc) cardDesc.innerText = stepData.desc;
+                if (cardMetric1) cardMetric1.innerText = stepData.m1;
+                if (cardMetric2) cardMetric2.innerText = stepData.m2;
+                if (stepBadge) stepBadge.innerText = stepData.badge;
+
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 250);
+        }
+
+        function scrollToStep(stepIndex) {
+            if (!tourSection) return;
+            const totalScrollable = tourSection.offsetHeight - window.innerHeight;
+            const targetScroll = tourSection.offsetTop + (totalScrollable * (stepIndex / 3.2));
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        }
+
+        // Hotspot Info Logic
+        function showHotspotInfo(title, desc) {
+            const titleEl = document.getElementById('hotspot-title');
+            const descEl = document.getElementById('hotspot-desc');
+            if (titleEl) titleEl.innerText = `Punto Seleccionado: ${title}`;
+            if (descEl) descEl.innerText = desc;
+        }
+
+        // Calculator Logic
+        function updateCalculator() {
+            const downPercentEl = document.getElementById('down-range');
+            const weeksEl = document.getElementById('weeks-range');
+            if (!downPercentEl || !weeksEl) return;
+
+            const downPercent = downPercentEl.value;
+            const weeks = weeksEl.value;
+            const downAmount = (28500000 * (downPercent / 100)).toLocaleString();
+
+            const downValEl = document.getElementById('down-val');
+            const weeksValEl = document.getElementById('weeks-val');
+            if (downValEl) downValEl.innerText = `${downPercent}% (${downAmount} €)`;
+            if (weeksValEl) weeksValEl.innerText = `${weeks} semanas`;
+
+            const gross = weeks * 80000;
+            const grossIncomeEl = document.getElementById('gross-income');
+            if (grossIncomeEl) grossIncomeEl.innerText = `${gross.toLocaleString()} €`;
+            
+            const roi = ((gross / 28500000) * 100).toFixed(1);
+            const roiValEl = document.getElementById('roi-val');
+            if (roiValEl) roiValEl.innerText = `${roi}% Anual`;
+        }
+
+        // Web Audio Synthesizer for Luxury Ocean Ambience
+        let audioCtx = null;
+        let isPlaying = false;
+
+        function toggleLuxuryAmbience() {
+            const soundIcon = document.getElementById('sound-icon');
+            if (!isPlaying) {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                startAmbientSound();
+                isPlaying = true;
+                if (soundIcon) {
+                    soundIcon.classList.remove('fa-volume-xmark');
+                    soundIcon.classList.add('fa-volume-high', 'text-emerald-400');
+                }
+            } else {
+                if (audioCtx) {
+                    audioCtx.suspend();
+                }
+                isPlaying = false;
+                if (soundIcon) {
+                    soundIcon.classList.remove('fa-volume-high', 'text-emerald-400');
+                    soundIcon.classList.add('fa-volume-xmark');
+                }
+            }
+        }
+
+        function startAmbientSound() {
+            const bufferSize = 2 * audioCtx.sampleRate;
+            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
+            }
+
+            const whiteNoise = audioCtx.createBufferSource();
+            whiteNoise.buffer = noiseBuffer;
+            whiteNoise.loop = true;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(320, audioCtx.currentTime);
+
+            const gain = audioCtx.createGain();
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+
+            whiteNoise.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+            whiteNoise.start(0);
+        }
+
+        // Form submission
+        function handleVipSubmit(e) {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            if (toast) {
+                toast.classList.remove('translate-y-24', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+                e.target.reset();
+
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-24', 'opacity-0');
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>
